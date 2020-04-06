@@ -10,7 +10,7 @@ and starts an sshd for easy login.
 
 To start do something like this:
 
-docker run -d --rm --name puppet --hostname puppet -e PASSWD=yourpasswd -p 1234:22 puppet_standalone
+docker run -d --rm --name puppet --hostname puppet -e PASSWD=yourpasswd -p 1234:22 harenber/puppet_standalone
 
 which will set "yourpasswd" as password and opens the sshd on port 1234.
 
