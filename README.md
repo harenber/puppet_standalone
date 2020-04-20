@@ -15,10 +15,11 @@ docker run -d --rm --name puppet --hostname puppet -e PASSWD=yourpasswd -p 1234:
 
 (for Ubuntu) or
 
-docker run -d --rm --name puppet --hostname puppet -e PASSWD=yourpasswd -p 1234:22 harenber/puppet_standalone:CentOS7
+docker run -d --rm --privileged -v /sys/fs/cgroup:/sys/fs/cgroup --name puppet --hostname puppet -e PASSWD=yourpasswd -p 1234:22 harenber/puppet_standalone:CentOS7
 
-(for CentOS7)
+(for CentOS7, as CentOS7 is based on systemd, you need to run privileged and mount cgroups)
 
 which will set "yourpasswd" as password and opens the sshd on port 1234.
 
 DO THIS AT YOUR OWN RISK, YOU ARE OPENING AN SSHD TO A ROOT SHELL
+
