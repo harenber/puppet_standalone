@@ -17,7 +17,12 @@ RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
 RUN cd /root && \
     git clone https://github.com/bitfield/puppet-beginners-guide-3.git && \
-    git clone -b production https://github.com/bitfield/control-repo-3
+    git clone -b production https://github.com/bitfield/control-repo-3 && \
+    mkdir /etc/puppetlabs/code/environments/new && cd /etc/puppetlabs/code/environments/new && \
+    echo 'modulepath = "modules:site-modules:$basemodulepath"' > environment.conf && \
+    cp ../production/hiera.yaml . && mkdir -p data/nodes && mkdir -p manifests && \
+    mkdir -p site-modules/profile/manifests && mkdir -p site-modules/role/manifests && \
+    echo "include(lookup('classes', Array[String], 'unique'))" > manifests/site.pp
 
 # start ssh and set password for the root user
 CMD /etc/init.d/ssh start && echo "root:$PASSWD" | chpasswd && tail -f /dev/null
