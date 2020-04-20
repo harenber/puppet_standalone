@@ -17,7 +17,7 @@ docker run -d --rm --name puppet --hostname puppet -e PASSWD=yourpasswd -p 1234:
 
 docker run -d --rm --privileged -v /sys/fs/cgroup:/sys/fs/cgroup --name puppet --hostname puppet -e PASSWD=yourpasswd -p 1234:22 harenber/puppet_standalone:CentOS7
 
-(for CentOS7, as CentOS7 is based on systemd, you need to run privileged and mount cgroups)
+(for CentOS7, as CentOS7 is based on systemd, you need to run privileged and mount cgroups. If your see errors like `invalid byte sequence in US-ASCII`, you may need to set `export LC_ALL="en_US.UTF-8"`)
 
 which will set "yourpasswd" as password and opens the sshd on port 1234.
 
